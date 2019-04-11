@@ -18,6 +18,29 @@ namespace Microsoft.Health.Fhir.Core.Messages.Export
             RequestUri = requestUri;
         }
 
-        public Uri RequestUri { get; }
+        public CreateExportRequest(Uri requestUri, string destinationType, string destinationConnectionString)
+        {
+            EnsureArg.IsNotNull(requestUri, nameof(requestUri));
+            EnsureArg.IsNotNullOrWhiteSpace(destinationType, nameof(destinationType));
+            EnsureArg.IsNotNullOrWhiteSpace(destinationConnectionString, nameof(destinationConnectionString));
+
+            RequestUri = requestUri;
+            DestinationType = destinationType;
+            DestinationConnectionString = destinationConnectionString;
+        }
+
+        [JsonConstructor]
+        protected CreateExportRequest()
+        {
+        }
+
+        [JsonProperty(JobRecordProperties.RequestUri)]
+        public Uri RequestUri { get; private set; }
+
+        [JsonProperty(JobRecordProperties.DestinationType)]
+        public string DestinationType { get; private set; }
+
+        [JsonProperty(JobRecordProperties.DestinationConnectionString)]
+        public string DestinationConnectionString { get; private set; }
     }
 }
