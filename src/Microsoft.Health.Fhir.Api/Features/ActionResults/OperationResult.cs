@@ -6,7 +6,6 @@
 using System.Collections.Generic;
 using System.Net;
 using EnsureThat;
-using Hl7.Fhir.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
@@ -22,14 +21,6 @@ namespace Microsoft.Health.Fhir.Api.Features.ActionResults
             StatusCode = statusCode;
         }
 
-        public OperationResult(OperationOutcome error, HttpStatusCode statusCode)
-        {
-            EnsureArg.IsNotNull(error, nameof(error));
-
-            Error = error;
-            StatusCode = statusCode;
-        }
-
         public OperationResult(ExportJobResult jobResult, HttpStatusCode statusCode)
         {
             EnsureArg.IsNotNull(jobResult, nameof(jobResult));
@@ -39,8 +30,6 @@ namespace Microsoft.Health.Fhir.Api.Features.ActionResults
         }
 
         public HttpStatusCode StatusCode { get; set; }
-
-        public OperationOutcome Error { get; }
 
         public ExportJobResult JobResult { get; }
 
@@ -70,19 +59,14 @@ namespace Microsoft.Health.Fhir.Api.Features.ActionResults
                 response.Headers.Add(header);
             }
 
-            // We will either have a JobResult or an Error, not both.
             ActionResult result;
-            if (Error == null && JobResult == null)
+            if (JobResult == null)
             {
                 result = new EmptyResult();
             }
-            else if (Error == null)
-            {
-                result = new ObjectResult(JobResult);
-            }
             else
             {
-                result = new ObjectResult(Error);
+                result = new ObjectResult(JobResult);
             }
 
             return result.ExecuteResultAsync(context);
