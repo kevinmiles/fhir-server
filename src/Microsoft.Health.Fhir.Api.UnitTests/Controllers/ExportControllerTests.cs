@@ -14,6 +14,7 @@ using Microsoft.Health.Fhir.Core.Features.Context;
 using Microsoft.Health.Fhir.Core.Features.Routing;
 using NSubstitute;
 using Xunit;
+using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.Health.Fhir.Api.UnitTests.Controllers
 {
@@ -24,7 +25,7 @@ namespace Microsoft.Health.Fhir.Api.UnitTests.Controllers
         private IFhirRequestContextAccessor _fhirRequestContextAccessor = Substitute.For<IFhirRequestContextAccessor>();
         private IUrlResolver _urlResolver = Substitute.For<IUrlResolver>();
 
-        private const string DestinationType = "AzureBlockBlob";
+        private const string DestinationType = "destinationType";
         private const string DestinationConnection = "destinationConnection";
 
         public ExportControllerTests()
@@ -33,7 +34,7 @@ namespace Microsoft.Health.Fhir.Api.UnitTests.Controllers
         }
 
         [Fact]
-        public async void GivenAnExportRequest_WhenDisabled_ThenRequestNotValidExceptionShouldBeThrown()
+        public async Task GivenAnExportRequest_WhenDisabled_ThenRequestNotValidExceptionShouldBeThrown()
         {
             var exportController = GetController(new ExportConfiguration() { Enabled = false });
 

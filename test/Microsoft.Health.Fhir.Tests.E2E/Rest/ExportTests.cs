@@ -43,7 +43,7 @@ namespace Microsoft.Health.Fhir.Tests.E2E.Rest
         }
 
         [Fact]
-        public async Task WhenRequestingExportWithCorrectHeaders_GivenExportIsEnabled_TheServerShouldReturnAcceptedAndNonEmptyContentLocationHeader()
+        public async Task GivenExportIsEnabled_WhenRequestingExportWithCorrectHeaders_TheServerShouldReturnAcceptedAndNonEmptyContentLocationHeader()
         {
             HttpRequestMessage request = GenerateExportRequest();
 
@@ -56,7 +56,7 @@ namespace Microsoft.Health.Fhir.Tests.E2E.Rest
         }
 
         [Fact]
-        public async Task WhenRequestingExportWithMissingDestinationConnectionParam_GivenExportIsEnabled_TheServerShouldReturnBadRequest()
+        public async Task GivenExportIsEnabled_WhenRequestingExportWithMissingDestinationConnectionParam_TheServerShouldReturnBadRequest()
         {
             var queryParam = new Dictionary<string, string>()
             {
@@ -70,7 +70,7 @@ namespace Microsoft.Health.Fhir.Tests.E2E.Rest
         }
 
         [Fact]
-        public async Task WhenRequestingExportWithMissingDestinationTypeParam_GivenExportIsEnabled_TheServerShouldReturnBadRequest()
+        public async Task GivenExportIsEnabled_WhenRequestingExportWithMissingDestinationTypeParam_TheServerShouldReturnBadRequest()
         {
             var queryParam = new Dictionary<string, string>()
             {
@@ -84,7 +84,7 @@ namespace Microsoft.Health.Fhir.Tests.E2E.Rest
         }
 
         [Fact]
-        public async Task WhenRequestingExportWithUnsupportedDestinationTypeParam_GivenExportIsEnabled_TheServerShouldReturnBadRequest()
+        public async Task GivenExportIsEnabled_WhenRequestingExportWithUnsupportedDestinationTypeParam_TheServerShouldReturnBadRequest()
         {
             var queryParam = new Dictionary<string, string>()
             {
@@ -99,7 +99,7 @@ namespace Microsoft.Health.Fhir.Tests.E2E.Rest
         }
 
         [Fact]
-        public async Task WhenRequestingExportStatus_GivenExportJobExists_TheServerShouldReturnAccepted()
+        public async Task GivenExportJobExists_WhenRequestingExportStatus_TheServerShouldReturnAccepted()
         {
             // Sending an export request so that a job record will be created in the system.
             HttpRequestMessage request = GenerateExportRequest();
@@ -120,7 +120,7 @@ namespace Microsoft.Health.Fhir.Tests.E2E.Rest
         }
 
         [Fact]
-        public async Task WhenRequestingExportStatus_GivenExportJobDoesNotExist_TheServerShouldReturnNotFound()
+        public async Task GivenExportJobDoesNotExist_WhenRequestingExportStatus_TheServerShouldReturnNotFound()
         {
             string getPath = OperationsConstants.Operations + "/" + OperationsConstants.Export + "/" + Guid.NewGuid();
             HttpRequestMessage getStatusRequest = new HttpRequestMessage()
@@ -138,7 +138,7 @@ namespace Microsoft.Health.Fhir.Tests.E2E.Rest
         [InlineData("applicaiton/xml")]
         [InlineData("*/*")]
         [InlineData("")]
-        public async Task WhenRequestingExportWithInvalidAcceptHeader_GivenExportIsEnabled_TheServerShouldReturnBadRequest(string acceptHeaderValue)
+        public async Task GivenExportIsEnabled_WhenRequestingExportWithInvalidAcceptHeader_TheServerShouldReturnBadRequest(string acceptHeaderValue)
         {
             HttpRequestMessage request = GenerateExportRequest(acceptHeader: acceptHeaderValue);
 
@@ -152,7 +152,7 @@ namespace Microsoft.Health.Fhir.Tests.E2E.Rest
         [InlineData("respond-status")]
         [InlineData("*")]
         [InlineData("")]
-        public async Task WhenRequestingExportWithInvalidPreferHeader_GivenExportIsEnabled_TheServerShouldReturnBadRequest(string preferHeaderValue)
+        public async Task GivenExportIsEnabled_WhenRequestingExportWithInvalidPreferHeader_TheServerShouldReturnBadRequest(string preferHeaderValue)
         {
             HttpRequestMessage request = GenerateExportRequest(preferHeader: preferHeaderValue);
 

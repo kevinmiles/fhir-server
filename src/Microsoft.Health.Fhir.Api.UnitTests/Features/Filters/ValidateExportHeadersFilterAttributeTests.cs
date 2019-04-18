@@ -95,7 +95,7 @@ namespace Microsoft.Health.Fhir.Api.UnitTests.Features.Filters
         }
 
         [Fact]
-        public void GivenARequestWithCorrectHeadersAndMissingDestinationTypeParam_WhenGettingAnExportOperaionRequest_ThenARequestNotValidExceptionShouldBeThrown()
+        public void GivenARequestWithCorrectHeadersAndMissingDestinationTypeParam_WhenGettingAnExportOperationRequest_ThenARequestNotValidExceptionShouldBeThrown()
         {
             var filter = GetFilter();
             var queryParams = new Dictionary<string, StringValues>()
@@ -112,7 +112,7 @@ namespace Microsoft.Health.Fhir.Api.UnitTests.Features.Filters
         }
 
         [Fact]
-        public void GivenARequestWithCorrectHeadersAndMissingDestinationConnectionParam_WhenGettingAnExportOperaionRequest_ThenARequestNotValidExceptionShouldBeThrown()
+        public void GivenARequestWithCorrectHeadersAndMissingDestinationConnectionParam_WhenGettingAnExportOperationRequest_ThenARequestNotValidExceptionShouldBeThrown()
         {
             var filter = GetFilter();
             var queryParams = new Dictionary<string, StringValues>()
@@ -129,7 +129,7 @@ namespace Microsoft.Health.Fhir.Api.UnitTests.Features.Filters
         }
 
         [Fact]
-        public void GivenARequestWithCorrectHeadersAndDestinationTypeThatIsNotSupported_WhenGettingAnExportOperaionRequest_ThenARequestNotValidExceptionShouldBeThrown()
+        public void GivenARequestWithCorrectHeadersAndDestinationTypeThatIsNotSupported_WhenGettingAnExportOperationRequest_ThenARequestNotValidExceptionShouldBeThrown()
         {
             var filter = GetFilter();
             var queryParams = new Dictionary<string, StringValues>()

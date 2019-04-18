@@ -29,18 +29,10 @@ namespace Microsoft.Health.Fhir.Core.Messages.Export
             DestinationConnectionString = destinationConnectionString;
         }
 
-        [JsonConstructor]
-        protected CreateExportRequest()
-        {
-        }
-
-        [JsonProperty(JobRecordProperties.RequestUri)]
         public Uri RequestUri { get; private set; }
 
-        [JsonProperty(JobRecordProperties.DestinationType)]
         public string DestinationType { get; private set; }
 
-        [JsonProperty(JobRecordProperties.DestinationConnectionString)]
         public string DestinationConnectionString { get; private set; }
     }
 }
